@@ -21,6 +21,6 @@ export default{
     },
 
     user(){
-        return api.get("user");
+        return api.get("/user");
     }
 }
