@@ -5,27 +5,32 @@
       password
       <input type="text" v-model="form.password"> <br>
 
-      <button @click.prevent="login">Login</button>
+      <button @click.prevent="handleLogin">Login</button>
+
+    <div v-if="loginErrors">
+        {{ loginErrors }}
+    </div>
   </div>
 </template>
 
 <script>
-import user from "../api/user";
+import { mapActions, mapState } from 'vuex'
 export default {
     data(){
         return{
             form:{
-            email: "",
-            password: ""
+                email: "",
+                password: ""
             }
         }
     },
+    computed:{
+        ...mapState('auth', ['loginResponse', 'loginErrors'])
+    },
     methods:{
-        login(){
-            user.login(this.form).then(() => {
-                localStorage.setItem("auth", "true")
-                this.$router.push({name: "Dashboard"})
-            })
+        ...mapActions('auth', ['login']),
+        handleLogin(){
+            this.login(this.form)
         }
     }
 }

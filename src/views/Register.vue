@@ -9,12 +9,22 @@
       password confirmation
       <input type="text" v-model="form.password_confirmation"> <br>
 
-      <button @click.prevent="register">Register</button>
+      <button @click.prevent="handleRegister">Register</button>
+
+      <div v-if="registerErrors">
+          {{ registerErrors }}
+      </div>
+
+      <div v-if="registerResponse">
+          {{ registerResponse }}
+      </div>
+
+      <router-link to="/login">Login</router-link>
   </div>
 </template>
 
 <script>
-import user from "../api/user";
+import { mapActions, mapState } from "vuex";
 export default {
     data(){
         return{
@@ -26,9 +36,13 @@ export default {
             }
         }
     },
+    computed:{
+        ...mapState('auth', ['registerResponse', 'registerErrors'])
+    },
     methods:{
-        register(){
-            user.register(this.form)
+        ...mapActions('auth', ['register']),
+        handleRegister(){
+            this.register(this.form)
         }
     },
     mounted(){
@@ -37,7 +51,7 @@ export default {
             alert(args)
         })
     }
-}
+    }
 </script>
 
 <style>

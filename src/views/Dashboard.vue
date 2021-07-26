@@ -7,12 +7,12 @@
         <h4>{{ user.email }}</h4>
       </div>
 
-      <button @click.prevent="logout">Logout</button>
+      <button @click.prevent="handleLogout">Logout</button>
   </div>
 </template>
 
 <script>
-import user from "../api/user"
+import { mapActions, mapState } from 'vuex'
 import api from "../api/api"
 import Navigation from "../components/Navigation.vue"
 export default {
@@ -21,21 +21,22 @@ export default {
     },
     data(){
         return{
-            user: null
+
         }
     },
+    computed:{
+        ...mapState('auth', ['user'])
+    },
     methods:{
-        logout(){
-            user.logout().then(() => {
-                localStorage.removeItem("auth")
-            })
+        ...mapActions('auth', ['logout', 'getUser']),
+        handleLogout(){
+            this.logout()
         }
     },
     mounted(){
-        user.user().then(response => {
-            this.user = response.data
-        })
 
+        this.getUser()
+        
         api.get('/abilities').then((response) => {
                 console.log(response.data)
             })
