@@ -12,6 +12,7 @@
 
 <script>
 import user from "../api/user"
+import api from "../api/api"
 export default {
     data(){
         return{
@@ -29,6 +30,10 @@ export default {
         user.user().then(response => {
             this.user = response.data
         })
+
+        api.get('/abilities').then((response) => {
+                console.log(response.data)
+            })
     }
 }
 </script>
