@@ -30,6 +30,12 @@ export default {
         register(){
             user.register(this.form)
         }
+    },
+    mounted(){
+        this.eventBus.on('test', (args) => {
+            console.log("yeaaa2")
+            alert(args)
+        })
     }
 }
 </script>

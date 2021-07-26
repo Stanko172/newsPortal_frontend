@@ -26,6 +26,18 @@ const routes = [
     name: 'Dashboard',
     meta: { authOnly: true },
     component: () => import('../views/Dashboard.vue')
+  },
+  {
+    path: '/posts',
+    name: 'Posts',
+    meta: { authOnly: true },
+    component: () => import('../views/Posts.vue')
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    meta: { authOnly: true },
+    component: () => import('../views/Contact.vue')
   }
   /*
   {

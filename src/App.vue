@@ -1,8 +1,9 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> 
-  </div>
+
+  <EventHub />
+
   <router-view/>
+  
 </template>
 
 <style>
@@ -13,17 +14,15 @@
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
+
+<script>
+import EventHub from './components/EventHub.vue'
+
+export default {
+  components:{
+    EventHub
+  }
+}
+</script>
+

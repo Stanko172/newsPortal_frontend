@@ -1,5 +1,6 @@
 <template>
   <div>
+      <Navigation />
       <h1>Dashboard</h1>
       <div v-if="user">
         <h3>{{ user.name }}</h3>
@@ -13,7 +14,11 @@
 <script>
 import user from "../api/user"
 import api from "../api/api"
+import Navigation from "../components/Navigation.vue"
 export default {
+    components:{
+        Navigation
+    },
     data(){
         return{
             user: null
@@ -34,6 +39,7 @@ export default {
         api.get('/abilities').then((response) => {
                 console.log(response.data)
             })
+        
     }
 }
 </script>
