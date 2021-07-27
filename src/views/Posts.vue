@@ -3,6 +3,8 @@
     <Navigation />
     <h1>Posts</h1>
 
+    <el-button type="primary">Primary</el-button>
+
     <button v-on:click="emitEvent" >Emit Event!</button> 
     <button v-on:click="updateAbility" >Update abilities</button> 
 
