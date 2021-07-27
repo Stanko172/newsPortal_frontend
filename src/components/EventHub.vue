@@ -5,24 +5,38 @@
 </template>
 
 <script>
+import api from '../api/api'
+
+import { AbilityBuilder, Ability } from '@casl/ability';
+import { ABILITY_TOKEN } from '@casl/vue';
 export default {
   name: 'EventHub',
+  inject: {
+      $ability: { from: ABILITY_TOKEN }
+  },
+  methods:{
+    updateAbility(newAbilities) {
+      const { can, rules } = new AbilityBuilder(Ability);
+
+      can(newAbilities, 'all');
+
+      console.log(this.$ability)
+
+      this.$ability.update(rules);
+    }
+  },
   created () {
     this.eventBus.on('test', (args) => {
-        console.log("yeaaa2")
         alert(args)
     })
   },
   watch: {
     $route: {
       handler() {
-        /*
-        axios.get('abilities').then(response => {
-          this.$ability.update([
-            { subject: 'all', actions: response.data.data }
-          ])
-        })*/
-        console.log("Route change!!!")
+        api.get('/abilities').then(response => {
+          console.log(response.data)
+          this.updateAbility(response.data)
+        })
       },
       immediate: true
     }
