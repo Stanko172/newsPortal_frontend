@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import api from '../api/api'
+import api from '../../api/api'
 
 import { AbilityBuilder, Ability } from '@casl/ability';
 import { ABILITY_TOKEN } from '@casl/vue';

@@ -7,6 +7,7 @@ import { abilitiesPlugin } from '@casl/vue'
 import ability from './services/ability'
 import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
+import 'element-plus/lib/theme-chalk/display.css';
 
 const eventBus = mitt()
 const app = createApp(App)
