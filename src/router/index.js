@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Dashboard',
+    meta: { authOnly: true },
+    component: () => import('../views/Dashboard.vue')
   },
   {
     path: '/register',
@@ -21,24 +21,6 @@ const routes = [
     meta: { guestOnly: true },
     component: Login
   },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    meta: { authOnly: true },
-    component: () => import('../views/Dashboard.vue')
-  },
-  {
-    path: '/posts',
-    name: 'Posts',
-    meta: { authOnly: true },
-    component: () => import('../views/Posts.vue')
-  },
-  {
-    path: '/contact',
-    name: 'Contact',
-    meta: { authOnly: true },
-    component: () => import('../views/Contact.vue')
-  }
   /*
   {
     path: '/about',

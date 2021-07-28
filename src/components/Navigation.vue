@@ -52,7 +52,8 @@
     v-model="drawer"
     :direction="direction"
     :before-close="handleClose">
-        <router-link to="/dashboard">Naslovnica</router-link>
+        <router-link to="/dashboard">Naslovnica</router-link> <br>
+        <router-link to="/posts">Posts</router-link>
     </el-drawer>
        
 
