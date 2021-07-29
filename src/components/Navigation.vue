@@ -16,7 +16,7 @@
     text-color="#fff"
     active-text-color="#fff">
         <el-menu-item index="1" class="custom-menu-title-class">NewsPortal</el-menu-item>
-        <el-menu-item index="2" class="custom-menu-item-class"><router-link to="/dashboard">Naslovnica</router-link></el-menu-item>
+        <el-menu-item index="2" class="custom-menu-item-class"><router-link to="/">Naslovnica</router-link></el-menu-item>
         <el-menu-item index="3" class="custom-menu-item-class"><a>Vijesti</a></el-menu-item>
         <el-menu-item index="4" class="custom-menu-item-class"><a>Sport</a></el-menu-item>
         <el-menu-item index="5" class="custom-menu-item-class"><a>Sci/Tech</a></el-menu-item>
@@ -48,12 +48,12 @@
     <!--Drawer for small and extra small screens-->
 
     <el-drawer
+    size="50%"
     title="NewsPortal"
     v-model="drawer"
     :direction="direction"
     :before-close="handleClose">
-        <router-link to="/dashboard">Naslovnica</router-link> <br>
-        <router-link to="/posts">Posts</router-link>
+        <router-link to="/">Naslovnica</router-link>
     </el-drawer>
        
 
@@ -107,6 +107,4 @@ export default {
 .el-icon-search, .el-icon-user{
     color: white !important;
 }
-
-
 </style>
