@@ -23,15 +23,16 @@
         <el-menu-item index="6" class="custom-menu-item-class"><a>Lifestyle</a></el-menu-item>
         <el-menu-item index="7" class="custom-menu-item-class"><a>Viral</a></el-menu-item>
 
-        <el-menu-item index="7" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><el-button>Sign up</el-button></el-menu-item>
-        <el-menu-item index="7" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><a>Login</a></el-menu-item>
+        <el-menu-item v-if="!isLoggedIn" index="7" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><el-button>Sign up</el-button></el-menu-item>
+        <el-menu-item v-if="!isLoggedIn" index="7" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><a>Login</a></el-menu-item>
 
-        <el-submenu index="2" style="float: right;">
+        <el-submenu v-if="isLoggedIn" index="2" style="float: right;">
             <template #title><i class="el-icon-user"></i></template>
-            <el-menu-item index="2-1">item one</el-menu-item>
-            <el-menu-item index="2-2">item two</el-menu-item>
+            <el-menu-item index="2-1">Profile</el-menu-item>
+            <el-menu-item index="2-2">Obavijesti</el-menu-item>
+            <el-menu-item index="2-3" @click="handleLogout">Odjava</el-menu-item>
         </el-submenu>
-        <el-menu-item index="7" class="custom-menu-item-class " style="float: right"><i class="el-icon-search"></i></el-menu-item>
+        <el-menu-item v-if="isLoggedIn" index="7" class="custom-menu-item-class " style="float: right"><i class="el-icon-search"></i></el-menu-item>
     </el-menu>
 
     <!--NavMenu for small and extra small screens-->
@@ -60,6 +61,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
     data(){
         return{
@@ -68,8 +70,15 @@ export default {
         }
     },
     methods:{
-         handleClose(done) {
+        ...mapActions('auth', ['logout']),
+        handleClose(done) {
             done();
+        },
+        isLoggedIn(){
+            if(localStorage.getItem('auth')) return true
+        },
+        handleLogout(){
+            this.logout()
         }
     }
 

@@ -28,10 +28,10 @@
 </template>
 
 <script>
-import Navigation from '../components/Navigation.vue'
+import Navigation from './Navigation.vue'
 import Tabs from '../components/dashboard/Tabs'
-import Search from '../components/dashboard/Search.vue'
-import News from '../components/dashboard/News.vue'
+import Search from './dashboard/Search.vue'
+import News from './dashboard/News.vue'
 export default {
     name: 'Article',
     components:{

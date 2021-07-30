@@ -33,10 +33,12 @@ export default {
   watch: {
     $route: {
       handler() {
-        api.get('/abilities').then(response => {
-          console.log(response.data)
-          this.updateAbility(response.data)
-        })
+        if(localStorage.getItem('auth')){
+          api.get('/abilities').then(response => {
+            console.log(response.data)
+            this.updateAbility(response.data)
+          })
+        }
       },
       immediate: true
     }

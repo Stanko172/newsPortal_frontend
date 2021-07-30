@@ -24,7 +24,7 @@ const routes = [
   {
     path: '/vijesti/:category/:id',
     name: 'Article',
-    component: () => import('../components/Article.vue')
+    component: () => import('../components/Articles.vue')
   },
   
   /*
