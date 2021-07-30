@@ -21,6 +21,12 @@ const routes = [
     meta: { guestOnly: true },
     component: Login
   },
+  {
+    path: '/vijesti/:category/:id',
+    name: 'Article',
+    component: () => import('../components/Article.vue')
+  },
+  
   /*
   {
     path: '/about',
