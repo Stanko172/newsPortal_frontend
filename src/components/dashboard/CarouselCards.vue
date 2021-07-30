@@ -9,7 +9,7 @@
     </el-card>
 
     <el-card class="carousel-card" shadow="hover">
-       <div class="carousel-card-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec molestie bibendum metus, pretium dignissim ligula commodo in.</div>
+       <div class="carousel-card-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
        <el-row>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="left">29.7.2021 11:17</el-col>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="right"><el-button size="small">Više</el-button></el-col>

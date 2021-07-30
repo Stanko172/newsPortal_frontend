@@ -21,6 +21,10 @@
               <CarouselCards />
             </el-col>
           </el-row>
+          <!--Sekcija sa svim vijestima-->
+            <News />
+
+            <el-button type="primary">Učitaj više vijesti</el-button>
         </el-col>
 
         <!--Desna sekcija naslovnice-->
@@ -40,6 +44,7 @@ import Search from "../components/dashboard/Search.vue"
 import Carousel from "../components/dashboard/Carousel.vue"
 import CarouselCards from "../components/dashboard/CarouselCards.vue"
 import Interviews from "../components/dashboard/Interviews.vue"
+import News from "../components/dashboard/News.vue"
 export default {
     components:{
         Navigation,
@@ -47,7 +52,8 @@ export default {
         Search,
         Carousel,
         CarouselCards,
-        Interviews
+        Interviews,
+        News
     },
     data(){
         return{
