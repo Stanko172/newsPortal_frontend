@@ -1,6 +1,6 @@
 <template>
   <el-row style="margin-top: 50px;" justify="center" :gutter="20">
-    <el-col :xs="24" :sm="24" :md="7" :lg="7" :xl="7">
+    <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
         <div class="news-image-container">
             <el-image src="https://source.unsplash.com/random/805x400" fit="fill"></el-image>
             <div class="news-description">
@@ -13,7 +13,7 @@
         </div>
       </el-col>
 
-      <el-col :xs="24" :sm="24" :md="7" :lg="7" :xl="7">
+      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
         <div class="news-image-container">
             <el-image src="https://source.unsplash.com/random/806x400" fit="fill"></el-image>
             <div class="news-description">
@@ -27,7 +27,7 @@
       </el-col>
 
 
-      <el-col :xs="24" :sm="24" :md="7" :lg="7" :xl="7">
+      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
         <div class="news-image-container">
             <el-image src="https://source.unsplash.com/random/807x400" fit="fill"></el-image>
             <div class="news-description">
@@ -40,7 +40,7 @@
         </div>
       </el-col>
 
-      <el-col :xs="24" :sm="24" :md="7" :lg="7" :xl="7">
+      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
         <div class="news-image-container">
             <el-image src="https://source.unsplash.com/random/808x400" fit="fill"></el-image>
             <div class="news-description">
@@ -53,7 +53,7 @@
         </div>
       </el-col>
 
-      <el-col :xs="24" :sm="24" :md="7" :lg="7" :xl="7">
+      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
         <div class="news-image-container">
             <el-image src="https://source.unsplash.com/random/809x400" fit="fill"></el-image>
             <div class="news-description">
@@ -66,7 +66,7 @@
         </div>
       </el-col>
 
-      <el-col :xs="24" :sm="24" :md="7" :lg="7" :xl="7">
+      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
         <div class="news-image-container">
             <el-image src="https://source.unsplash.com/random/810x400" fit="fill"></el-image>
             <div class="news-description">
@@ -79,7 +79,7 @@
         </div>
       </el-col>
 
-      <el-col :xs="24" :sm="24" :md="7" :lg="7" :xl="7">
+      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
         <div class="news-image-container">
             <el-image src="https://source.unsplash.com/random/811x400" fit="fill"></el-image>
             <div class="news-description">
@@ -92,7 +92,7 @@
         </div>
       </el-col>
 
-      <el-col :xs="24" :sm="24" :md="7" :lg="7" :xl="7">
+      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
         <div class="news-image-container">
             <el-image src="https://source.unsplash.com/random/812x400" fit="fill"></el-image>
             <div class="news-description">
@@ -129,6 +129,10 @@ export default {
     font-weight: 700;
     letter-spacing: 0.8px;
     padding: 0.5em;
+}
+
+.news-link a{
+    text-decoration: none;
 }
 
 .news-information{

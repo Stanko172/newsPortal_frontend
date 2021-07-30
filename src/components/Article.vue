@@ -20,6 +20,10 @@
       <div>
           {{ $route.params.category }} | {{ $route.params.id }}
       </div>
+
+      <News />
+
+      <el-button type="primary">Učitaj više vijesti</el-button>
   </div>
 </template>
 
@@ -27,12 +31,14 @@
 import Navigation from '../components/Navigation.vue'
 import Tabs from '../components/dashboard/Tabs'
 import Search from '../components/dashboard/Search.vue'
+import News from '../components/dashboard/News.vue'
 export default {
     name: 'Article',
     components:{
         Navigation,
         Tabs,
-        Search
+        Search,
+        News
     }
 }
 </script>
