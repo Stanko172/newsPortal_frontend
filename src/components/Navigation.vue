@@ -12,7 +12,7 @@
     <el-menu
     class="el-menu-demo hidden-sm-and-down"
     mode="horizontal"
-    background-color="#409EFF"
+    background-color="#004379"
     text-color="#fff"
     active-text-color="#fff">
         <el-menu-item index="1" class="custom-menu-title-class">NewsPortal</el-menu-item>
@@ -39,10 +39,10 @@
     <el-menu
     class="el-menu-demo hidden-md-and-up"
     mode="horizontal"
-    background-color="#409EFF"
+    background-color="#004379"
     text-color="#fff"
     active-text-color="#fff">
-        <el-menu-item class="menu-icon-item"><el-button type="primary" @click="drawer = true"><i class="el-icon-menu"></i></el-button></el-menu-item>
+        <el-menu-item class="menu-icon-item"><el-button @click="drawer = true"><i class="el-icon-menu"></i></el-button></el-menu-item>
         <el-menu-item index="1" class="custom-menu-title-class">NewsPortal</el-menu-item>
     </el-menu>
 
@@ -115,5 +115,10 @@ export default {
 
 .el-icon-search, .el-icon-user{
     color: white !important;
+}
+
+.el-button{
+    background: #004379;
+    border: none;
 }
 </style>

@@ -80,7 +80,7 @@ img{
     bottom: 0;
     left: 0;
     right: 0;
-    background: #409EFF;
+    background: #004379;
 }
 
 .carousel-item-content h2{

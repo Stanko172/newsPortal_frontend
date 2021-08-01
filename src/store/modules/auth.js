@@ -19,9 +19,7 @@ const getters = {
 const actions = {
     async register({ commit }, form){
         await csrf.getCookie();
-        api.post('/register', form).then((response) => {
-            commit('UPDATE_REGISTER_RESPONSE', response)
-        })
+        api.post('/register', form)
         .catch((error) => {
             commit('UPDATE_REGISTER_ERRORS', error)
         })

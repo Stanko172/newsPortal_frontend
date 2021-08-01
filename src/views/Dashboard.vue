@@ -24,7 +24,7 @@
           <!--Sekcija sa svim vijestima-->
             <News />
 
-            <el-button type="primary">Učitaj više vijesti</el-button>
+            <el-button>Učitaj više vijesti</el-button>
         </el-col>
 
         <!--Desna sekcija naslovnice-->
@@ -63,12 +63,18 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .content-container{
   margin: 15px 10px 15px 10px;
 }
 
 .tabs-section{
   margin-bottom: 15px;
+}
+
+.el-button{
+  background: #004379;
+  color: white;
+  border: none;
 }
 </style>

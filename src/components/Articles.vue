@@ -15,11 +15,6 @@
           <el-col :xs="24" :sm="24" :md="18" :lg="18" :xl="18"> <Tabs /> </el-col>
           <el-col :md="6" :lg="6" :xl="6"> <Search /> </el-col>
       </el-row>
-      Article page
-
-      <div>
-          {{ $route.params.category }} | {{ $route.params.id }}
-      </div>
 
       <News />
 
@@ -47,8 +42,8 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap');
 
 .category-header-row{
-    margin-top: 2px;
-    background: #409EFF;
+    margin-top: 1px;
+    background: #ED1C24;
 }
 
 .category-header{
@@ -58,7 +53,13 @@ export default {
 }
 
 .tabs-section{
-    margin-top: 5px;
+    margin-top: 10px;
+}
+
+.el-button{
+  background: #004379;
+  color: white;
+  border: none;
 }
 
 </style>

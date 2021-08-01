@@ -40,7 +40,7 @@ export default {
 }
 
 .carousel-card{
-    background: #409EFF;
+    background: #004379;
     box-shadow: rgba(0, 0, 0, 0.30) 0px 5px 15px;;
     color: #fff;
     font-weight: 600;
@@ -55,6 +55,16 @@ export default {
 .carousel-card-text{
     font-size: 14px;
     margin-bottom: 15px;
+}
+
+.el-button{
+    background: #ED1C24;
+    color: white;
+    border: none;
+}
+
+.el-button:hover{
+    background: #ed1c239c;
 }
 
 .left{
