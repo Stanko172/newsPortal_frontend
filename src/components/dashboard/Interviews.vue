@@ -73,7 +73,7 @@
   .custom-card{
       max-width: 250px;
       max-height: 500px;
-      margin-bottom: 10px;
+      margin-bottom: 2em;
   }
 
   .interviews-container{

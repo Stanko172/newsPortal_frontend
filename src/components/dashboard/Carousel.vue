@@ -1,38 +1,25 @@
 <template>
-  <el-carousel indicator-position="outside" height="400px">
-    <el-carousel-item v-for="item in items" :key="item">
+  <el-carousel indicator-position="outside" height="450px">
+    <el-carousel-item v-for="item in getAllArticles.slice(0, 5)" :key="item">
       
-      <figure><img :src="item.img"></figure>
+      <figure><img :src="item.title_image ? serverURL + item.title_image.path : 'https://cdn.pixabay.com/photo/2015/06/08/15/11/typewriter-801921_960_720.jpg'"></figure>
       <div class="carousel-item-content"><h2>{{ item.title }}</h2></div>
     </el-carousel-item>
   </el-carousel>
 </template>
 
 <script>
+import server from '../../api/server'
+import { mapGetters } from 'vuex'
 export default {
     data(){
         return{
-            items:[
-                {
-                    title: 'First item',
-                    img: 'https://source.unsplash.com/random/800x400'
-                },
-                {
-                    title: 'Second item',
-                    img: 'https://source.unsplash.com/random/801x400'
-                },
-                {
-                    title: 'Third item',
-                    img: 'https://source.unsplash.com/random/802x400'
-                },
-                {
-                    title: 'Fourth item',
-                    img: 'https://source.unsplash.com/random/803x400'
-                }
-
-            ]
+            serverURL: server
         }
-    }
+    },
+    computed:{
+        ...mapGetters('dashboard', ['getAllArticles'])
+    },
 }
 </script>
 
@@ -81,6 +68,7 @@ img{
     left: 0;
     right: 0;
     background: #004379;
+    padding: 0.8em;
 }
 
 .carousel-item-content h2{

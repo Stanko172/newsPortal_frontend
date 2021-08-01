@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="getAllArticles">
       <Navigation />
 
       <el-row class="category-header-row">
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Navigation from './Navigation.vue'
 import Tabs from '../components/dashboard/Tabs'
 import Search from './dashboard/Search.vue'
@@ -34,6 +35,20 @@ export default {
         Tabs,
         Search,
         News
+    },
+    data(){
+        return{
+
+        }
+    },
+    methods:{
+        ...mapActions('dashboard', ['fetchArticles'])
+    },
+    computed:{
+        ...mapGetters('dashboard', ['getAllArticles'])
+    },
+    created(){
+        this.fetchArticles()
     }
 }
 </script>
@@ -42,7 +57,6 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap');
 
 .category-header-row{
-    margin-top: 1px;
     background: #ED1C24;
 }
 

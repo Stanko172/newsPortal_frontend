@@ -2,7 +2,7 @@
   <div>
     <Navigation />
 
-    <div class="content-container">
+    <div class="content-container" v-if="getAllArticles">
 
       <!--Tabs i search sekcija-->
       <el-row class="tabs-section">
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import Navigation from "../components/Navigation.vue"
 import Tabs from "../components/dashboard/Tabs.vue"
 import Search from "../components/dashboard/Search.vue"
@@ -57,9 +59,18 @@ export default {
     },
     data(){
         return{
-
+          
         }
     },
+    computed:{
+      ...mapGetters('dashboard', ['getAllArticles'])
+    },
+    methods:{
+      ...mapActions('dashboard', ['fetchArticles'])
+    },
+    created(){
+      this.fetchArticles();
+    }
 }
 </script>
 
@@ -76,5 +87,6 @@ export default {
   background: #004379;
   color: white;
   border: none;
+  margin-bottom: 1.6em;
 }
 </style>

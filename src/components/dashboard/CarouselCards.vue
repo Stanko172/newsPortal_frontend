@@ -1,25 +1,9 @@
 <template>
   <div class="carousel-card-container">
-    <el-card class="carousel-card" shadow="hover">
-        <div class="carousel-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+    <el-card class="carousel-card" shadow="hover" v-for="article in getAllArticles.slice(5, 8)" :key="article.id">
+        <div class="carousel-card-text">{{ article.title }}</div>
         <el-row>
-            <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="left">29.7.2021 11:17</el-col>
-            <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="right"><el-button size="small">Više</el-button></el-col>
-        </el-row>
-    </el-card>
-
-    <el-card class="carousel-card" shadow="hover">
-       <div class="carousel-card-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-       <el-row>
-            <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="left">29.7.2021 11:17</el-col>
-            <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="right"><el-button size="small">Više</el-button></el-col>
-        </el-row>
-    </el-card>
-
-    <el-card class="carousel-card" shadow="hover">
-        <div class="carousel-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-        <el-row>
-            <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="left">29.7.2021 11:17</el-col>
+            <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="left">{{ article.created_at }}</el-col>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="right"><el-button size="small">Više</el-button></el-col>
         </el-row>
     </el-card>
@@ -27,8 +11,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
+    data(){
+        return{
 
+        }
+    },
+    computed:{
+        ...mapGetters('dashboard', ['getAllArticles'])
+    }
 }
 </script>
 
@@ -48,6 +40,7 @@ export default {
     line-height: 18px;
     min-width: 5em;
     max-width: 19em;
+    max-height:150px !important;
     padding: 0.2em;
     margin-bottom: 10px;
 }

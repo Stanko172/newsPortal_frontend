@@ -1,105 +1,13 @@
 <template>
-  <el-row style="margin-top: 50px;" justify="center" :gutter="20">
-    <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
+  <el-row justify="center" :gutter="20">
+    <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7" v-for="item in getAllArticles.slice(5)" :key="item.id">
         <div class="news-image-container">
-            <el-image src="https://source.unsplash.com/random/805x400" fit="fill"></el-image>
+            <el-image :src="item.title_image ? serverURL + item.title_image.path : 'https://cdn.pixabay.com/photo/2015/06/08/15/11/typewriter-801921_960_720.jpg'" fit="fill"></el-image>
             <div class="news-description">
-                <div class="news-link"><router-link to="/">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</router-link></div>
+                <div class="news-link"><router-link to="/">{{ item.title }}</router-link></div>
                 <div class="news-information">
                     <i class="el-icon-share"></i>
-                    <div>30.7.2021 10:31</div>
-                </div>
-            </div>
-        </div>
-      </el-col>
-
-      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
-        <div class="news-image-container">
-            <el-image src="https://source.unsplash.com/random/806x400" fit="fill"></el-image>
-            <div class="news-description">
-                <div class="news-link"><router-link to="/">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</router-link></div>
-                <div class="news-information">
-                    <i class="el-icon-share"></i>
-                    <div>30.7.2021 10:31</div>
-                </div>
-            </div>
-        </div>
-      </el-col>
-
-
-      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
-        <div class="news-image-container">
-            <el-image src="https://source.unsplash.com/random/807x400" fit="fill"></el-image>
-            <div class="news-description">
-                <div class="news-link"><router-link to="/">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</router-link></div>
-                <div class="news-information">
-                    <i class="el-icon-share"></i>
-                    <div>30.7.2021 10:31</div>
-                </div>
-            </div>
-        </div>
-      </el-col>
-
-      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
-        <div class="news-image-container">
-            <el-image src="https://source.unsplash.com/random/808x400" fit="fill"></el-image>
-            <div class="news-description">
-                <div class="news-link"><router-link to="/">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</router-link></div>
-                <div class="news-information">
-                    <i class="el-icon-share"></i>
-                    <div>30.7.2021 10:31</div>
-                </div>
-            </div>
-        </div>
-      </el-col>
-
-      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
-        <div class="news-image-container">
-            <el-image src="https://source.unsplash.com/random/809x400" fit="fill"></el-image>
-            <div class="news-description">
-                <div class="news-link"><router-link to="/">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</router-link></div>
-                <div class="news-information">
-                    <i class="el-icon-share"></i>
-                    <div>30.7.2021 10:31</div>
-                </div>
-            </div>
-        </div>
-      </el-col>
-
-      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
-        <div class="news-image-container">
-            <el-image src="https://source.unsplash.com/random/810x400" fit="fill"></el-image>
-            <div class="news-description">
-                <div class="news-link"><router-link to="/">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</router-link></div>
-                <div class="news-information">
-                    <i class="el-icon-share"></i>
-                    <div>30.7.2021 10:31</div>
-                </div>
-            </div>
-        </div>
-      </el-col>
-
-      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
-        <div class="news-image-container">
-            <el-image src="https://source.unsplash.com/random/811x400" fit="fill"></el-image>
-            <div class="news-description">
-                <div class="news-link"><router-link to="/">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</router-link></div>
-                <div class="news-information">
-                    <i class="el-icon-share"></i>
-                    <div>30.7.2021 10:31</div>
-                </div>
-            </div>
-        </div>
-      </el-col>
-
-      <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7">
-        <div class="news-image-container">
-            <el-image src="https://source.unsplash.com/random/812x400" fit="fill"></el-image>
-            <div class="news-description">
-                <div class="news-link"><router-link to="/">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</router-link></div>
-                <div class="news-information">
-                    <i class="el-icon-share"></i>
-                    <div>30.7.2021 10:31</div>
+                    <div>{{ item.created_at }}</div>
                 </div>
             </div>
         </div>
@@ -108,8 +16,17 @@
 </template>
 
 <script>
+import server from '../../api/server'
+import { mapGetters } from 'vuex'
 export default {
-
+    data(){
+        return{
+            serverURL: server
+        }
+    },
+    computed:{
+        ...mapGetters('dashboard', ['getAllArticles'])
+    }
 }
 </script>
 
@@ -122,10 +39,11 @@ export default {
 .el-col{
     display: flex;
     justify-content: center;
+    margin: 1.6em 0 1.6em 0;
 }
 
 .news-link{
-    font-size: 1.3em;
+    font-size: 1.15em;
     font-weight: 700;
     letter-spacing: 0.8px;
     padding: 0.5em;
@@ -146,5 +64,9 @@ export default {
     margin-right: 0.5em;
 }
 
+.el-image{
+    width: 260px;
+    height: 150px; 
+}
 
 </style>

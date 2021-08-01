@@ -1,4 +1,4 @@
-<template>
+<template v-if="categories">
 <!--
     <div id="nav">
         <router-link to="/">Home</router-link> |
@@ -16,23 +16,18 @@
     text-color="#fff"
     active-text-color="#fff">
         <el-menu-item index="1" class="custom-menu-title-class">NewsPortal</el-menu-item>
-        <el-menu-item index="2" class="custom-menu-item-class"><router-link to="/">Naslovnica</router-link></el-menu-item>
-        <el-menu-item index="3" class="custom-menu-item-class"><a>Vijesti</a></el-menu-item>
-        <el-menu-item index="4" class="custom-menu-item-class"><a>Sport</a></el-menu-item>
-        <el-menu-item index="5" class="custom-menu-item-class"><a>Sci/Tech</a></el-menu-item>
-        <el-menu-item index="6" class="custom-menu-item-class"><a>Lifestyle</a></el-menu-item>
-        <el-menu-item index="7" class="custom-menu-item-class"><a>Viral</a></el-menu-item>
+        <el-menu-item v-for="(category, index) in categories" :key="index" :index="(index + 1).toString()" class="custom-menu-item-class"><router-link :to="category === 'naslovnica'? '/' : '/vijesti/' + category">{{ category }}</router-link></el-menu-item>
 
-        <el-menu-item v-if="!isLoggedIn" index="7" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><el-button>Sign up</el-button></el-menu-item>
-        <el-menu-item v-if="!isLoggedIn" index="7" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><a>Login</a></el-menu-item>
+        <el-menu-item v-if="!isLoggedIn" index="100" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><el-button>Sign up</el-button></el-menu-item>
+        <el-menu-item v-if="!isLoggedIn" index="101" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><a>Login</a></el-menu-item>
 
-        <el-submenu v-if="isLoggedIn" index="2" style="float: right;">
+        <el-submenu v-if="isLoggedIn" index="102" style="float: right;">
             <template #title><i class="el-icon-user"></i></template>
-            <el-menu-item index="2-1">Profile</el-menu-item>
-            <el-menu-item index="2-2">Obavijesti</el-menu-item>
-            <el-menu-item index="2-3" @click="handleLogout">Odjava</el-menu-item>
+            <el-menu-item index="103-1">Profil</el-menu-item>
+            <el-menu-item index="104-2">Obavijesti</el-menu-item>
+            <el-menu-item index="105-3" @click="handleLogout">Odjava</el-menu-item>
         </el-submenu>
-        <el-menu-item v-if="isLoggedIn" index="7" class="custom-menu-item-class " style="float: right"><i class="el-icon-search"></i></el-menu-item>
+        <el-menu-item v-if="isLoggedIn" index="106" class="custom-menu-item-class " style="float: right"><i class="el-icon-search"></i></el-menu-item>
     </el-menu>
 
     <!--NavMenu for small and extra small screens-->
@@ -54,14 +49,17 @@
     v-model="drawer"
     :direction="direction"
     :before-close="handleClose">
-        <router-link to="/">Naslovnica</router-link>
+        <div v-for="(category, index) in categories" :key="index" class="link-mobile">
+            <router-link  :to="category === 'naslovnica'? '/' : '/vijesti/' + category">{{ category }}</router-link> <br />
+        </div>
+        <el-button v-if="isLoggedIn" class="mobile-logout-button" @click="logout">Odjava</el-button>
     </el-drawer>
        
 
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
     data(){
         return{
@@ -69,8 +67,12 @@ export default {
             direction: 'ltr',
         }
     },
+    computed:{
+        ...mapState('navigation', ['categories'])
+    },
     methods:{
-        ...mapActions('auth', ['logout']),
+        ...mapActions('auth', ['logout',]),
+        ...mapActions('navigation', ['fetchCategories']),
         handleClose(done) {
             done();
         },
@@ -80,6 +82,9 @@ export default {
         handleLogout(){
             this.logout()
         }
+    },
+    created(){
+        this.fetchCategories()
     }
 
 }
@@ -106,6 +111,7 @@ export default {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.6px;
+    border-bottom: none !important;
 }
 
 .el-icon-menu{
@@ -120,5 +126,26 @@ export default {
 .el-button{
     background: #004379;
     border: none;
+}
+
+.el-menu.el-menu--horizontal{
+    border-bottom: none;
+}
+
+.link-mobile{
+    padding: 0.55em;
+}
+
+.link-mobile a{
+    color:#004379;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.mobile-logout-button{
+    margin-top: 1.8em;
+    background: #ED1C24;
+    color: white;
 }
 </style>
