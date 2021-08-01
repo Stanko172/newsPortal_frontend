@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 import Navigation from "../components/Navigation.vue"
 import Tabs from "../components/dashboard/Tabs.vue"
@@ -62,14 +62,22 @@ export default {
           
         }
     },
+    watch: {
+      'tab': function() {
+        //Opcije: Najnovije, najčitanije, preporučeno
+        console.log(this.tab)
+        this.fetchArticles(this.tab)
+      }
+    },
     computed:{
+      ...mapState(['tab']),
       ...mapGetters('dashboard', ['getAllArticles'])
     },
     methods:{
       ...mapActions('dashboard', ['fetchArticles'])
     },
     created(){
-      this.fetchArticles();
+      this.fetchArticles('Najnovije');
     }
 }
 </script>

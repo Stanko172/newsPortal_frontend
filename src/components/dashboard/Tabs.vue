@@ -7,15 +7,20 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
   export default {
     data() {
       return {
         activeName: 'first'
       };
     },
+    computed:{
+      ...mapState(['tab'])
+    },
     methods: {
+      ...mapActions(['setTab']),
       handleClick(tab) {
-        console.log(tab.props.label);
+        this.setTab(tab.props.label)
       }
     }
   };

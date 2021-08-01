@@ -15,10 +15,10 @@ const getters = {
 
 //Actions
 const actions = {
-    async fetchArticles({ commit }){
+    async fetchArticles({ commit }, payload){
         await csrf.getCookie();
         
-        api.get('/front/articles')
+        api.post('/front/articles', {payload: payload})
         .then((response) =>{
             commit('SET_ARTICLES', response.data)
         })
