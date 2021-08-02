@@ -73,6 +73,7 @@ export default {
     methods:{
         ...mapActions('auth', ['logout',]),
         ...mapActions('navigation', ['fetchCategories']),
+        ...mapActions('articles', ['fetchCategoryArticles']),
         handleClose(done) {
             done();
         },

@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-card-container">
-    <el-card class="carousel-card" shadow="hover" v-for="article in getAllArticles.slice(5, 8)" :key="article.id">
+    <el-card class="carousel-card" shadow="hover" v-for="article in getAllArticles.slice(4, 7)" :key="article.id">
         <div class="carousel-card-text">{{ article.title }}</div>
         <el-row>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="left">{{ article.created_at }}</el-col>

@@ -1,8 +1,8 @@
 <template>
   <el-row justify="center" :gutter="20">
-    <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7" v-for="item in getAllArticles.slice(7)" :key="item.id">
+    <el-col :xs="24" :sm="11" :md="7" :lg="7" :xl="7" v-for="item in getAllCategoryArticles" :key="item.id">
         <div class="news-image-container">
-            <el-image :src="item.title_image ? serverURL + item.title_image.path : 'https://cdn.pixabay.com/photo/2015/06/08/15/11/typewriter-801921_960_720.jpg'" fit="fill"></el-image>
+            <el-image :src="item.title_image ? serverURL + item.title_image : 'https://cdn.pixabay.com/photo/2015/06/08/15/11/typewriter-801921_960_720.jpg'" fit="fill"></el-image>
             <div class="news-description">
                 <div class="news-link"><router-link to="/">{{ item.title }}</router-link></div>
                 <div class="news-information">
@@ -25,7 +25,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters('dashboard', ['getAllArticles'])
+        ...mapGetters('articles', ['getAllCategoryArticles'])
     }
 }
 </script>

@@ -3,6 +3,7 @@ import api from '../../api/api'
 
 //State
 const state = {
+    tab: 'Najnovije',
     pageNum: 1,
     articles: null,
     interviews: null,
@@ -17,6 +18,11 @@ const getters = {
 
 //Actions
 const actions = {
+    setTab({ commit }, tabValue){
+        commit('SET_TAB', tabValue)
+        commit('CLEAR_ARTICLES_STATE', null)
+  
+    },
     async fetchArticles({ commit }, payload){
         await csrf.getCookie();
 
@@ -57,6 +63,7 @@ const actions = {
 
 //Mutations
 const mutations = {
+    SET_TAB: (state, tab) => state.tab = tab,
     SET_ARTICLES: (state, articles) => state.articles = articles,
     ADD_ARTICLES: (state, articles) => state.articles.push(...articles),
     CLEAR_ARTICLES_STATE(state){ state.pageNum = 0; },

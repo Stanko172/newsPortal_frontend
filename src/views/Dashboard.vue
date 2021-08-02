@@ -69,7 +69,7 @@ export default {
       }
     },
     computed:{
-      ...mapState(['tab']),
+      ...mapState('dashboard', ['tab']),
       ...mapGetters('dashboard', ['getAllArticles'])
     },
     methods:{

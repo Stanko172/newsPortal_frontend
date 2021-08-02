@@ -1,5 +1,5 @@
 <template>
-  <el-tabs type="card" @tab-click="handleClick">
+  <el-tabs type="card" @tab-click="handleClick" :key="renderKey">
     <el-tab-pane label="Najnovije"></el-tab-pane>
     <el-tab-pane label="Najčitanije"></el-tab-pane>
     <el-tab-pane label="Preporučeno"></el-tab-pane>
@@ -11,14 +11,25 @@ import { mapActions, mapState } from 'vuex'
   export default {
     data() {
       return {
-        activeName: 'first'
-      };
+        activeName: 'first',
+        renderKey: 1
+      }
+    },
+    watch: {
+        $route: {
+        handler() {
+            if(this.$route.name === 'Article'){
+                this.renderKey++
+            }
+        },
+            immediate: true
+        },
     },
     computed:{
-      ...mapState('dashboard', ['tab'])
+      ...mapState('articles', ['tab'])
     },
     methods: {
-      ...mapActions('dashboard', ['setTab']),
+      ...mapActions('articles', ['setTab']),
       handleClick(tab) {
         this.setTab(tab.props.label)
       }

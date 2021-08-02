@@ -1,6 +1,6 @@
 <template>
   <el-carousel indicator-position="outside" height="450px">
-    <el-carousel-item v-for="item in getAllArticles.slice(0, 5)" :key="item">
+    <el-carousel-item v-for="item in getAllArticles.slice(0, 4)" :key="item">
       
       <figure><img :src="item.title_image ? serverURL + item.title_image.path : 'https://cdn.pixabay.com/photo/2015/06/08/15/11/typewriter-801921_960_720.jpg'"></figure>
       <div class="carousel-item-content"><h2>{{ item.title }}</h2></div>
