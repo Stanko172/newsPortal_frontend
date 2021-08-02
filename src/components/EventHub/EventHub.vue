@@ -20,8 +20,6 @@ export default {
 
       can(newAbilities, 'all');
 
-      console.log(this.$ability)
-
       this.$ability.update(rules);
     }
   },
@@ -35,7 +33,6 @@ export default {
       handler() {
         if(localStorage.getItem('auth')){
           api.get('/abilities').then(response => {
-            console.log(response.data)
             this.updateAbility(response.data)
           })
         }

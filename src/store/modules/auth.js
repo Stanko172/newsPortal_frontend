@@ -25,7 +25,6 @@ const actions = {
         })
     },
     async login({ commit }, form){
-        console.log(form)
         await csrf.getCookie();
         api.post('/login', form)
         .then(() =>{

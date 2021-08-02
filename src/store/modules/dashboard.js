@@ -3,9 +3,9 @@ import api from '../../api/api'
 
 //State
 const state = {
-    pageNum: 0,
-    articles: [],
-    interviews: [],
+    pageNum: 1,
+    articles: null,
+    interviews: null,
     errors: null,
 }
 
@@ -17,14 +17,25 @@ const getters = {
 
 //Actions
 const actions = {
-    async fetchArticles({ commit, state }, payload){
+    async fetchArticles({ commit }, payload){
+        await csrf.getCookie();
+
+        api.post('/front/articles', {payload: payload})
+        .then((response) =>{
+            commit('SET_ARTICLES', response.data)
+        })
+        .catch((error) =>{
+            commit('FETCH_ARTICLES_ERRORS', error)
+        });
+    },
+    async addMoreArticles({ commit, state }, payload){
         await csrf.getCookie();
 
         state.pageNum += 1
-        console.log('pageeeeeeeeeee num: ', state.pageNum)
+        console.log(state.pageNum, payload)
         api.post('/front/articles', {payload: payload, page: state.pageNum})
         .then((response) =>{
-            commit('SET_ARTICLES', response.data)
+            commit('ADD_ARTICLES', response.data)
         })
         .catch((error) =>{
             commit('FETCH_ARTICLES_ERRORS', error)
@@ -46,7 +57,9 @@ const actions = {
 
 //Mutations
 const mutations = {
-    SET_ARTICLES: (state, articles) => state.articles.push(...articles),
+    SET_ARTICLES: (state, articles) => state.articles = articles,
+    ADD_ARTICLES: (state, articles) => state.articles.push(...articles),
+    CLEAR_ARTICLES_STATE(state){ state.pageNum = 0; },
     FETCH_ARTICLES_ERRORS: (state, errors) => state.errors = errors,
     SET_INTERVIEWS: (state, interviews) => state.interviews = interviews
 }

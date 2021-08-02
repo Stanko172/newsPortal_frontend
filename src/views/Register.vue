@@ -47,7 +47,6 @@ export default {
     },
     mounted(){
         this.eventBus.on('test', (args) => {
-            console.log("yeaaa2")
             alert(args)
         })
     }

@@ -24,7 +24,7 @@
           <!--Sekcija sa svim vijestima-->
             <News />
 
-            <el-button @click="fetchArticles(tab)">Učitaj više vijesti</el-button>
+            <el-button @click="addMoreArticles(tab)">Učitaj više vijesti</el-button>
         </el-col>
 
         <!--Desna sekcija naslovnice-->
@@ -65,7 +65,6 @@ export default {
     watch: {
       'tab': function() {
         //Opcije: Najnovije, najčitanije, preporučeno
-        console.log(this.tab)
         this.fetchArticles(this.tab)
       }
     },
@@ -74,7 +73,7 @@ export default {
       ...mapGetters('dashboard', ['getAllArticles'])
     },
     methods:{
-      ...mapActions('dashboard', ['fetchArticles', 'fetchInterviews'])
+      ...mapActions('dashboard', ['fetchArticles', 'addMoreArticles', 'fetchInterviews'])
     },
     created(){
       this.fetchArticles('Najnovije');

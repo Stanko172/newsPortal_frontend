@@ -14,6 +14,8 @@ export default createStore({
   actions: {
     setTab({ commit }, tabValue){
       commit('SET_TAB', tabValue)
+      commit('dashboard/CLEAR_ARTICLES_STATE', null, { root: true })
+
     }
   },
   modules: {
