@@ -27,7 +27,7 @@ import EventHub from './components/EventHub/EventHub.vue'
 export default {
   components:{
     EventHub
-  }
+  },
 }
 </script>
 

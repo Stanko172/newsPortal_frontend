@@ -6,7 +6,7 @@ import navigation from './modules/navigation'
 export default createStore({
   plugins: [createLogger()],
   state: {
-    tab: ''
+    tab: 'Najnovije'//Default vrijednost zahtjeva
   },
   mutations: {
     SET_TAB: (state, tab) => state.tab = tab

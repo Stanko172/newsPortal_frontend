@@ -24,7 +24,7 @@
           <!--Sekcija sa svim vijestima-->
             <News />
 
-            <el-button>Učitaj više vijesti</el-button>
+            <el-button @click="fetchArticles(tab)">Učitaj više vijesti</el-button>
         </el-col>
 
         <!--Desna sekcija naslovnice-->
@@ -74,10 +74,11 @@ export default {
       ...mapGetters('dashboard', ['getAllArticles'])
     },
     methods:{
-      ...mapActions('dashboard', ['fetchArticles'])
+      ...mapActions('dashboard', ['fetchArticles', 'fetchInterviews'])
     },
     created(){
       this.fetchArticles('Najnovije');
+      this.fetchInterviews();
     }
 }
 </script>

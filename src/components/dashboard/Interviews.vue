@@ -1,34 +1,12 @@
 <template>
-<div class="interviews-container">
+<div class="interviews-container" v-if="getInterviews">
     <p class="interview-header">Intervju tjedna</p>
-    <el-card :body-style="{ padding: '0px' }" class="custom-card">
-        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" >
+    <el-card :body-style="{ padding: '0px' }" class="custom-card" v-for="interview in getInterviews" :key="interview.id">
+        <img :src="interview.title_image !== null ? serverURL + interview.title_image : 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'" class="image" >
         <div style="padding: 14px;">
-            <span>John Doe</span>
+            <span>{{ interview.title }}</span>
             <div class="bottom">
-            <time class="time">29.7.2021 11:35</time>
-            <el-button type="text" class="button">Više</el-button>
-            </div>
-        </div>
-    </el-card>
-
-    <el-card :body-style="{ padding: '0px' }" class="custom-card">
-        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-        <div style="padding: 14px;">
-            <span>John Doe</span>
-            <div class="bottom">
-            <time class="time">29.7.2021 11:35</time>
-            <el-button type="text" class="button">Više</el-button>
-            </div>
-        </div>
-    </el-card>
-
-    <el-card :body-style="{ padding: '0px' }" class="custom-card">
-        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-        <div style="padding: 14px;">
-            <span>John Doe</span>
-            <div class="bottom">
-            <time class="time">29.7.2021 11:35</time>
+            <time class="time">{{ interview.created_at }}</time>
             <el-button type="text" class="button">Više</el-button>
             </div>
         </div>
@@ -37,12 +15,18 @@
 </template>
 
 <script>
-  export default {
+import server from '../../api/server' 
+import { mapGetters } from 'vuex'
+export default {
   data() {
     return {
-      currentDate: new Date()
-    };
-  }
+      currentDate: new Date(),
+      serverURL: server
+    }
+  },
+  computed:{
+    ...mapGetters('dashboard', ['getInterviews'])
+  },
 }
 </script>
 
