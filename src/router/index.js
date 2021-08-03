@@ -26,7 +26,11 @@ const routes = [
     name: 'Article',
     component: () => import('../components/articles/Articles.vue')
   },
-  
+  {
+    path: '/pretrazivanje',
+    name: 'Search',
+    component: () => import('../views/Search.vue')
+  },  
   /*
   {
     path: '/about',
