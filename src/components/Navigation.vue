@@ -19,7 +19,7 @@
             <el-menu-item index="104-2">Obavijesti</el-menu-item>
             <el-menu-item index="105-3" @click="handleLogout">Odjava</el-menu-item>
         </el-submenu>
-        <el-menu-item v-if="isLoggedIn" index="106" class="custom-menu-item-class " style="float: right"><i class="el-icon-search"></i></el-menu-item>
+        <el-menu-item v-if="isLoggedIn" index="106" class="custom-menu-item-class " style="float: right"><router-link to="/pretrazivanje"><i class="el-icon-search"></i></router-link></el-menu-item>
     </el-menu>
 
     <!--NavMenu for small and extra small screens-->

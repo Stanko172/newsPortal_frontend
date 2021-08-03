@@ -3,7 +3,7 @@
       <Navigation />
     <el-row justify="center" style="margin-top: 1.5em;">
         <el-col :xs="24" :sm="24" :md="18" :lg="18" :xl="18">
-            <el-input v-model="searchText" @keyup="setSearchString(searchText)">
+            <el-input v-model="searchText" @keyup="setSearchString(searchText)" @keyup.enter="fetchArticles">
                 <template #append>
                     <el-button icon="el-icon-search"></el-button>
                 </template>
@@ -14,22 +14,22 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
             <div class="search-info">
                 <h3>Rezultati pretrage</h3>
-                <p>Pronađeno <b>0</b> rezultata</p>
+                <p>Pronađeno <b>{{ getArticles.length }}</b> rezultata</p>
             </div>
         </el-col>
     </el-row>
-    <el-row justify="center">
+    <el-row justify="center" v-for="(article, index) in getArticles" :key="index">
         <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
             <el-row>
                 <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
                     <div class="image-container">
-                        <el-image src="https://source.unsplash.com/random/800x600" fit="scale-down"></el-image>
+                        <el-image :src="article.title_image ? serverURL + article.title_image : 'https://cdn.pixabay.com/photo/2015/06/08/15/11/typewriter-801921_960_720.jpg'" fit="scale-down"></el-image>
                     </div>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
                     <div class="info-container">
-                    <div class="info-header"><router-link to="/">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit consequatur aut sapiente?</router-link></div>
-                    <div class="info-body"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda error minima doloremque totam natus, reprehenderit libero, non omnis unde eum numquam tempora illo? Nemo, dolor nam et atque accusantium saepe.</p></div>
+                    <div class="info-header"><router-link to="/">{{ article.title }}</router-link></div>
+                    <div class="info-body"><p>{{ reduceString(article.body, 200) }}</p></div>
                     <div class="info-date">
                         <div class="icons-date">
                     <i class="el-icon-share"></i>
@@ -41,34 +41,12 @@
             </el-row>
         </el-col>
     </el-row>
-    <el-row justify="center">
-                <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
-                    <el-row>
-                        <el-col :xs="24" :sm="24" :md="24" :lg="6" :xl="6">
-                            <div class="image-container">
-                                <el-image src="https://source.unsplash.com/random/800x600" fit="scale-down"></el-image>
-                            </div>
-                        </el-col>
-                        <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="18">
-                            <div class="info-container">
-                            <div class="info-header"><router-link to="/">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit consequatur aut sapiente?</router-link></div>
-                            <div class="info-body"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda error minima doloremque totam natus, reprehenderit libero, non omnis unde eum numquam tempora illo? Nemo, dolor nam et atque accusantium saepe.</p></div>
-                            <div class="info-date">
-                                <div class="icons-date">
-                            <i class="el-icon-share"></i>
-                            <div>lkjdsflkj</div>
-                                </div>
-                            </div>
-                            </div>
-                        </el-col>
-                    </el-row>
-                </el-col>
-            </el-row>
     
   </div>
 </template>
 
 <script>
+import server from '../api/server'
 import { mapActions, mapGetters } from 'vuex'
 import Navigation from '../components/Navigation.vue'
 export default {
@@ -77,18 +55,23 @@ export default {
     },
     data(){
         return{
+            serverURL: server,
             searchText: ''
         }
     },
     computed:{
-        ...mapGetters('search', ['getSearchString'])
+        ...mapGetters('search', ['getSearchString', 'getArticles'])
     },
     methods:{
-        ...mapActions('search', ['setSearchString'])
+        ...mapActions('search', ['setSearchString', 'fetchArticles']),
+        reduceString(string, length){
+            return string.length > length ? string.substring(0, length) + "..." : string;
+        }
     },
     mounted(){
         this.searchText = this.getSearchString
-    }
+        this.fetchArticles()
+    },
 }
 </script>
 
@@ -115,7 +98,7 @@ export default {
 .info-header{
     font-size:18px;
     font-weight: 700;
-    padding: 1em;
+    margin-top: 2em;
 }
 
 .info-header a{
@@ -144,7 +127,7 @@ export default {
     display: flex;
     align-items: center;
     font-size: 18px;
-    padding: 1em;
+    padding: 0.2em 1em 0.2em 1em;
     text-align: justify;
     flex: 1;
 }
