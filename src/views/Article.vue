@@ -50,6 +50,12 @@
                  </el-col>
              </el-row>
 
+             <el-row>
+                 <el-col :span="24">
+                    <Comments />
+                 </el-col>
+             </el-row>
+
           </el-col>
       </el-row>
   </div>
@@ -59,9 +65,11 @@
 import server from '../api/server'
 import { mapActions, mapGetters } from 'vuex'
 import Navigation from '../components/Navigation.vue'
+import Comments from '../components/articles/Comments.vue'
 export default {
     components:{
-        Navigation
+        Navigation,
+        Comments
     },
     data(){
         return{
