@@ -9,9 +9,18 @@
             <el-row>
                 <el-col :span="24">
                     <div class="article-info">
-                        <p v-if="getArticle.author">{{ getArticle.author.name }}</p>
-                        <p>{{ getArticle.article_created_at }}</p>
-                        <p>{{ getArticle.views }}</p>
+                        <div class="icon-info-container">
+                            <i class="fas fa-user-alt"></i>
+                            <p v-if="getArticle.author">{{ getArticle.author.name }}</p>
+                        </div>
+                        <div class="icon-info-container">
+                            <i class="fas fa-calendar"></i>
+                            <p v-if="getArticle.author">{{ getArticle.article_created_at }}</p>
+                        </div>
+                        <div class="icon-info-container">
+                            <i class="fas fa-eye"></i>
+                            <p v-if="getArticle.author">{{ getArticle.views }}</p>
+                        </div>
                     </div>
                 </el-col>
              </el-row>
@@ -83,15 +92,23 @@ export default {
 
 .article-info{
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5em;
     padding: 0 1em 0.7em 1em;
 }
 
-.article-info>p{
-    font-size: 1.2em;
+.icon-info-container{
+    display: flex;
+    gap: 0.7em;
+    align-items: center;
 }
 
-.article-info>p:first-child{
+.icon-info-container>i{
+    color: #004379;
+    font-size: 1.5em;
+}
+
+.icon-info-container>p{
     font-size: 1.2em;
     font-weight: 500;
     color: #004379;
@@ -108,8 +125,14 @@ export default {
 
 .info-buttons{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 1em;
+}
+
+.el-button{
+    margin-top: 10px;
+    width: 130px;
 }
 
 .el-button:first-child{
@@ -125,6 +148,7 @@ export default {
 
 .el-button:nth-child(3){
     background: #FF0000;
+    margin-left: 0px;
 }
 
 .el-button:last-child{
