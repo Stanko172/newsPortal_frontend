@@ -18,7 +18,7 @@ import { mapActions, mapState } from 'vuex'
     watch: {
         $route: {
         handler() {
-            if(this.$route.name === 'Article'){
+            if(this.$route.name === 'Articles'){
                 this.renderKey++
             }
         },

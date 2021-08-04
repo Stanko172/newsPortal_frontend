@@ -4,6 +4,7 @@ import navigation from './modules/navigation'
 import search from './modules/search'
 import dashboard from './modules/dashboard'
 import articles from './modules/articles'
+import article from './modules/article'
 
 export default createStore({
   plugins: [createLogger()],
@@ -12,6 +13,7 @@ export default createStore({
     navigation,
     search,
     dashboard,
-    articles
+    articles,
+    article
   }
 })

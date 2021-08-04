@@ -27,10 +27,10 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import Navigation from '../Navigation.vue'
-import Tabs from './Tabs.vue'
-import Search from '../../components/dashboard/Search.vue'
-import News from './News.vue'
+import Navigation from '../components/Navigation.vue'
+import Tabs from '../components/articles/Tabs.vue'
+import Search from '../components/dashboard/Search.vue'
+import News from '../components/articles/News.vue'
 export default {
     name: 'Article',
     components:{
@@ -47,7 +47,7 @@ export default {
     watch: {
         $route: {
             handler(){
-                if(this.$route.name === 'Article'){
+                if(this.$route.name === 'Articles'){
                     console.log("Route change!", this.$route.params.category, this.tab)
                     this.fetchCategoryArticles(this.routeName)
                 }
