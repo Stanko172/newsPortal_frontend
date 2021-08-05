@@ -5,8 +5,11 @@
             <h1>Komentari</h1>
         </el-col>
         <el-col :span="20" class="write-comment-section" v-if="logginStatus">
-            <h4>Napiši komentar</h4>
-            <textarea name="comment" id="" cols="40" rows="4"></textarea>
+            <div class="write-comment-info">
+                <h4>Napiši komentar</h4>
+                <el-button size="medium" @click="handleCreateComment">Pošalji komentar</el-button>
+            </div>
+            <textarea name="comment" id="" cols="40" rows="4" v-model="content"></textarea>
         </el-col>
             <el-col :span="20">
               <el-row>
@@ -15,7 +18,10 @@
                     <div class="comment-container">
                         <div class="comment-first-row">
                             <h4>{{ comment.author }}</h4>
-                            <span>{{ comment.created_at }}</span>
+                            <div>
+                                <span>{{ comment.created_at }}</span>
+                                <el-button v-if="comment.can_delete" size="small" icon="el-icon-delete" @click="deleteComment(comment.id)"></el-button>
+                            </div>
                         </div>
                         <p>{{ comment.content }}</p>
                         <div class="actions-container">
@@ -39,10 +45,10 @@
                         </div>
                     </div>
                 </el-col>
+                <el-col>
+                    <Pagination />
+                </el-col>
             </el-row>
-
-            <Pagination />
-
         </el-col>
     </el-row>
 </div>
@@ -52,16 +58,29 @@
 import { mapActions, mapGetters, mapState } from 'vuex'
 import Pagination from './Pagination.vue'
 export default {
+    data(){
+        return{
+            content: ""
+        }
+    },
     components:{
         Pagination
     },
     computed:{
-        ...mapGetters('comments', ['getComments']),
+        ...mapGetters('comments', ['getComments', 'getCommentsNumber']),
         ...mapState('auth', ['logginStatus'])
     },
     methods:{
-        ...mapActions('comments', ['fetchComments', 'likeCommentToggle', 'dislikeCommentToggle']),
-        ...mapActions('auth', ['isLoggedIn'])
+        ...mapActions('comments', ['fetchComments', 'likeCommentToggle', 'dislikeCommentToggle', 'createComment', 'deleteComment']),
+        ...mapActions('auth', ['isLoggedIn']),
+        handleCreateComment(){
+            let payload = {
+                article_id : this.$route.params.id,
+                content: this.content
+            }
+            this.createComment(payload)
+            this.content = ""
+        }
     },
     created(){
         this.isLoggedIn()
@@ -100,6 +119,17 @@ export default {
     justify-content: space-between;
 }
 
+.comment-first-row div{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.comment-first-row div .el-button{
+    color: white;
+    background:#ED1C24;
+}
+
 .react-container{
     display: flex;
     gap: 1em;
@@ -136,6 +166,18 @@ export default {
 
 .write-comment-section{
     text-align: start;
+}
+
+.write-comment-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.write-comment-info .el-button{
+    color: white;
+    background:#004379;
 }
 
 textarea {
