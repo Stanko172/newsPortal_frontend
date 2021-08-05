@@ -8,6 +8,7 @@ const state = {
     user: null,
     registerErrors: null,
     loginErrors: null,
+    logginStatus: null
 }
 
 // Getter functions
@@ -17,6 +18,11 @@ const getters = {
 
 // Actions 
 const actions = {
+    isLoggedIn({ commit }){
+        var isLoggedIn = localStorage.getItem('auth') == null ? false : true
+
+        commit('SET_LOGIN_STATUS', isLoggedIn)
+    },
     async register({ commit }, form){
         await csrf.getCookie();
         api.post('/register', form)
@@ -58,6 +64,7 @@ const mutations = {
     SET_USER: (state, user) => state.user = user,
     UPDATE_REGISTER_ERRORS: (state, errors) => state.registerErrors = errors.response.data.errors,
     UPDATE_LOGIN_ERRORS: (state, errors) => state.loginErrors = errors.response.data.errors,
+    SET_LOGIN_STATUS: (state, logginStatus) => state.logginStatus = logginStatus
 }
 
 export default {

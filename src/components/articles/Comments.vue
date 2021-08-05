@@ -1,10 +1,10 @@
 <template>
-<div>
+<div> 
     <el-row justify="center">
         <el-col :span="20">
             <h1>Komentari</h1>
         </el-col>
-        <el-col :span="20" class="write-comment-section">
+        <el-col :span="20" class="write-comment-section" v-if="logginStatus">
             <h4>Napiši komentar</h4>
             <textarea name="comment" id="" cols="40" rows="4"></textarea>
         </el-col>
@@ -15,17 +15,17 @@
                     <div class="comment-container">
                         <div class="comment-first-row">
                             <h4>{{ comment.author }}</h4>
-                            <span >{{ comment.created_at }}</span>
+                            <span>{{ comment.created_at }}</span>
                         </div>
                         <p>{{ comment.content }}</p>
                         <div class="actions-container">
                             <div class="react-container">
                             <div>
-                                <i class="far fa-thumbs-up"></i>
+                                <i :class="[logginStatus ? 'clickable' : '', comment.is_liked  == 1 ? 'liked' : '', 'far fa-thumbs-up']" @click="likeCommentToggle(comment.id)"></i>
                                 <span>{{ comment.likes }}</span>
                             </div>
                             <div>
-                                <i class="far fa-thumbs-down"></i>
+                                <i :class="[logginStatus ? 'clickable' : '', comment.is_disliked  == 1 ? 'disliked' : '', 'far fa-thumbs-down']" @click="dislikeCommentToggle(comment.id)"></i>
                                 <span>{{ comment.dislikes }}</span>
                             </div>
                             </div>
@@ -49,17 +49,22 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import Pagination from './Pagination.vue'
 export default {
     components:{
         Pagination
     },
     computed:{
-        ...mapGetters('comments', ['getComments'])
+        ...mapGetters('comments', ['getComments']),
+        ...mapState('auth', ['logginStatus'])
     },
     methods:{
-        ...mapActions('comments', ['fetchComments'])
+        ...mapActions('comments', ['fetchComments', 'likeCommentToggle', 'dislikeCommentToggle']),
+        ...mapActions('auth', ['isLoggedIn'])
+    },
+    created(){
+        this.isLoggedIn()
     },
     mounted(){
         this.fetchComments(this.$route.params.id)
@@ -139,5 +144,19 @@ textarea {
     box-sizing: border-box;
 
     width: 100%;
+}
+
+.clickable{
+    cursor:pointer;
+}
+
+.liked{
+    color: #004379;
+    font-weight: bold;
+}
+
+.disliked{
+    color: #ED1C24;
+    font-weight: bold;
 }
 </style>

@@ -6,7 +6,6 @@ const routes = [
   {
     path: '/',
     name: 'Dashboard',
-    meta: { authOnly: true },
     component: () => import('../views/Dashboard.vue')
   },
   {
@@ -30,6 +29,11 @@ const routes = [
     path: '/vijesti/:category/:id',
     name: 'Article',
     component: () => import('../views/Article.vue')
+  },
+  {
+    path: '/vijesti/:category/:id/komentar/:comment_id',
+    name: 'Comment',
+    component: () => import('../views/Comment.vue')
   },
   {
     path: '/pretrazivanje',
