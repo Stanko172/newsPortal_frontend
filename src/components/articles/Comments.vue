@@ -21,11 +21,11 @@
                         <div class="actions-container">
                             <div class="react-container">
                             <div>
-                                <i :class="[logginStatus ? 'clickable' : '', comment.is_liked  == 1 ? 'liked' : '', 'far fa-thumbs-up']" @click="likeCommentToggle(comment.id)"></i>
+                                <i :class="[logginStatus ? 'clickable' : '', comment.is_liked  == 1 ? 'liked' : '', 'far fa-thumbs-up']" @click="logginStatus ? likeCommentToggle(comment.id) : ''"></i>
                                 <span>{{ comment.likes }}</span>
                             </div>
                             <div>
-                                <i :class="[logginStatus ? 'clickable' : '', comment.is_disliked  == 1 ? 'disliked' : '', 'far fa-thumbs-down']" @click="dislikeCommentToggle(comment.id)"></i>
+                                <i :class="[logginStatus ? 'clickable' : '', comment.is_disliked  == 1 ? 'disliked' : '', 'far fa-thumbs-down']" @click="logginStatus ? dislikeCommentToggle(comment.id) : ''"></i>
                                 <span>{{ comment.dislikes }}</span>
                             </div>
                             </div>
