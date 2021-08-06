@@ -40,7 +40,7 @@
                                     <i class="fas fa-comments"></i>
                                     <span>{{ comment.replies_num }}</span>
                                 </div>
-                                <router-link to="/"><i class="fas fa-reply"></i></router-link>
+                                <router-link :to="`/vijesti/${$route.params.category}/${$route.params.id}/komentar/${comment.id}`"><i class="fas fa-reply"></i></router-link>
                             </div>
                         </div>
                     </div>
