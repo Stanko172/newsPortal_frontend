@@ -7,16 +7,16 @@
     background-color="#004379"
     text-color="#fff"
     active-text-color="#fff">
-        <el-menu-item index="1" class="custom-menu-title-class">NewsPortal</el-menu-item>
+        <el-menu-item index="1" class="custom-menu-title-class">newsPortal</el-menu-item>
         <el-menu-item v-for="(category, index) in categories" :key="index" :index="(index + 1).toString()" class="custom-menu-item-class"><router-link :to="category === 'naslovnica'? '/' : '/vijesti/' + category">{{ category }}</router-link></el-menu-item>
 
         <el-menu-item v-if="!isLoggedIn" index="100" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><el-button>Sign up</el-button></el-menu-item>
         <el-menu-item v-if="!isLoggedIn" index="101" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><a>Login</a></el-menu-item>
 
         <el-submenu v-if="isLoggedIn" index="102" style="float: right;">
-            <template #title><i class="el-icon-user"></i></template>
+            <template #title><i class="el-icon-user"><el-badge is-dot class="top-badge" v-if="getUnreadNotificationsNum > 0"></el-badge></i></template>
             <el-menu-item index="103-1">Profil</el-menu-item>
-            <el-menu-item index="104-2">Obavijesti</el-menu-item>
+            <el-menu-item index="104-2"><el-badge v-if="getUnreadNotificationsNum" class="nested-badge" :value="getUnreadNotificationsNum" :max="99"><router-link to="/obavijesti" class="notifications-link">Obavijesti</router-link></el-badge></el-menu-item>
             <el-menu-item index="105-3" @click="handleLogout">Odjava</el-menu-item>
         </el-submenu>
         <el-menu-item v-if="isLoggedIn" index="106" class="custom-menu-item-class " style="float: right"><router-link to="/pretrazivanje"><i class="el-icon-search"></i></router-link></el-menu-item>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
     data(){
         return{
@@ -59,13 +59,23 @@ export default {
             direction: 'ltr',
         }
     },
+    watch: {
+        $route: {
+        handler() {
+            this.fetchCategories()
+        },
+        immediate: true
+        }
+    },
     computed:{
-        ...mapState('navigation', ['categories'])
+        ...mapState('navigation', ['categories']),
+        ...mapGetters('notifications', ['getUnreadNotificationsNum'])
     },
     methods:{
         ...mapActions('auth', ['logout',]),
         ...mapActions('navigation', ['fetchCategories']),
         ...mapActions('articles', ['fetchCategoryArticles']),
+        ...mapActions('notifications', ['fetchUnreadNotifications']),
         handleClose(done) {
             done();
         },
@@ -77,13 +87,26 @@ export default {
         }
     },
     created(){
-        this.fetchCategories()
+        this.fetchUnreadNotifications()
     }
 
 }
 </script>
 
 <style scoped>
+.top-badge{
+    right: 0px;
+    top: -20px;
+}
+
+.nested-badge{
+    top: 0px;
+}
+
+.notifications-link{
+    color: white;
+}
+
 .el-menu-item a{
     text-decoration: none;
 }

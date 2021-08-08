@@ -3,22 +3,25 @@ import api from '../../api/api'
 
 //State
 const state = {
-    notifications: []
+    notifications: [],
+    unreadNotificationsNum: 0
 }
 
 //Getters
 const getters = {
-    getNotifications: state => state.notifications
+    getNotifications: state => state.notifications,
+    getUnreadNotificationsNum: state => state.unreadNotificationsNum
 }
 
 //Actions
 const actions = {
-    async fetchNotifications({ commit }, filter){
+    async fetchNotifications({ commit, dispatch }, filter){
         await csrf.getCookie();
         
         api.post('/front/notifications', { filter })
         .then((response) =>{
             commit('SET_NOTIFICATIONS', response.data)
+            dispatch('fetchUnreadNotifications')
         })
     },
     async changeStatus({ dispatch }, payload){
@@ -38,13 +41,23 @@ const actions = {
             console.log(response)
             dispatch('fetchNotifications', payload.filter)
         })
+    },
+    async fetchUnreadNotifications({ commit }){
+        await csrf.getCookie();
+        
+        api.get('/front/notifications/unread_num')
+        .then((response) =>{
+            console.log(response.data.unread_num)
+            commit('SET_UNREAD_NUM', response.data.unread_num)
+        })
     }
 
 }
 
 //Mutations
 const mutations = {
-    SET_NOTIFICATIONS: (state, notifications) => state.notifications = notifications
+    SET_NOTIFICATIONS: (state, notifications) => state.notifications = notifications,
+    SET_UNREAD_NUM: (state, unread_num) => state.unreadNotificationsNum = unread_num
 }
 
 export default{
