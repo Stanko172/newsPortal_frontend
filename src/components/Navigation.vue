@@ -16,7 +16,7 @@
         <el-submenu v-if="isLoggedIn" index="102" style="float: right;">
             <template #title><i class="el-icon-user"><el-badge is-dot class="top-badge" v-if="getUnreadNotificationsNum > 0"></el-badge></i></template>
             <el-menu-item index="103-1">Profil</el-menu-item>
-            <el-menu-item index="104-2"><el-badge v-if="getUnreadNotificationsNum" class="nested-badge" :value="getUnreadNotificationsNum" :max="99"><router-link to="/obavijesti" class="notifications-link">Obavijesti</router-link></el-badge></el-menu-item>
+            <el-menu-item index="104-2"><router-link to="/obavijesti" class="notifications-link">Obavijesti</router-link><el-badge v-if="getUnreadNotificationsNum" class="nested-badge" :value="getUnreadNotificationsNum" :max="99"></el-badge></el-menu-item>
             <el-menu-item index="105-3" @click="handleLogout">Odjava</el-menu-item>
         </el-submenu>
         <el-menu-item v-if="isLoggedIn" index="106" class="custom-menu-item-class " style="float: right"><router-link to="/pretrazivanje"><i class="el-icon-search"></i></router-link></el-menu-item>
@@ -100,7 +100,8 @@ export default {
 }
 
 .nested-badge{
-    top: 0px;
+    top: -15px;
+    left: 5px;
 }
 
 .notifications-link{
