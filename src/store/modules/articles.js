@@ -6,7 +6,8 @@ const state = {
     tab: 'Najnovije',
     pageNum: 1,
     articles: null,
-    errors: null
+    errors: null,
+    loading: false
 }
 
 //Getters
@@ -26,9 +27,8 @@ const actions = {
         
         api.post('/front/articles/show', { category_name: payload, tab: state.tab})
         .then((response) =>{
-            console.log("Nova tura: ", response.data)
-            console.log("Kategorija: ", payload)
             commit('SET_ARTICLES', response.data)
+            commit('SET_LOADING', true)
         })
     },
     async addMoreCategoryArticles({ commit, state }, payload){
@@ -52,7 +52,8 @@ const mutations = {
     SET_TAB: (state, tab) => state.tab = tab,
     CLEAR_ARTICLES_STATE(state){ state.pageNum = 0; },
     ADD_ARTICLES: (state, articles) => state.articles.push(...articles),
-    FETCH_ARTICLES_ERRORS: (state, errors) => state.errors = errors,   
+    FETCH_ARTICLES_ERRORS: (state, errors) => state.errors = errors,  
+    SET_LOADING: (state, loading) => state.loading = loading 
 }
 
 export default{

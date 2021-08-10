@@ -3,7 +3,8 @@ import api from '../../api/api'
 
 //State
 const state = {
-    article: []
+    article: [],
+    loaded: false
 }
 
 //Getters
@@ -19,6 +20,7 @@ const actions = {
         api.post('/front/articles/article/show', { id })
         .then((response) =>{
             commit('SET_ARTICLE', response.data)
+            commit('SET_LOADED', true)
         })
     },
 
@@ -26,7 +28,8 @@ const actions = {
 
 //Mutations
 const mutations = {
-    SET_ARTICLE: (state, article) => state.article = article
+    SET_ARTICLE: (state, article) => state.article = article,
+    SET_LOADED: (state, loaded) => state.loaded = loaded
 }
 
 export default{

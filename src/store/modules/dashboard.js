@@ -8,6 +8,7 @@ const state = {
     articles: null,
     interviews: null,
     errors: null,
+    loading: false
 }
 
 //Getters
@@ -29,6 +30,7 @@ const actions = {
         api.post('/front/articles', {payload: payload})
         .then((response) =>{
             commit('SET_ARTICLES', response.data)
+            commit('SET_LOADING', true)
         })
         .catch((error) =>{
             commit('FETCH_ARTICLES_ERRORS', error)
@@ -68,7 +70,8 @@ const mutations = {
     ADD_ARTICLES: (state, articles) => state.articles.push(...articles),
     CLEAR_ARTICLES_STATE(state){ state.pageNum = 0; },
     FETCH_ARTICLES_ERRORS: (state, errors) => state.errors = errors,
-    SET_INTERVIEWS: (state, interviews) => state.interviews = interviews
+    SET_INTERVIEWS: (state, interviews) => state.interviews = interviews,
+    SET_LOADING: (state, loading) => state.loading = loading
 }
 
 export default{

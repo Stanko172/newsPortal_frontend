@@ -1,5 +1,5 @@
 <template>
-  <div v-if="getArticle">
+  <div v-if="loaded">
       <Navigation />
 
       <el-row justify="center">
@@ -63,7 +63,7 @@
 
 <script>
 import server from '../api/server'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import Navigation from '../components/Navigation.vue'
 import Comments from '../components/articles/Comments.vue'
 export default {
@@ -80,6 +80,7 @@ export default {
         ...mapActions('article', ['fetchArticle'])
     },
     computed:{
+        ...mapState('article', ['loaded']),
         ...mapGetters('article', ['getArticle'])
     },
     created(){

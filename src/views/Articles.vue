@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="loading">
       <Navigation />
 
       <el-row class="category-header-row">
@@ -64,7 +64,7 @@ export default {
         ...mapActions('articles', ['fetchCategoryArticles', 'addMoreCategoryArticles'])
     },
     computed:{
-        ...mapState('articles', ['tab']),
+        ...mapState('articles', ['tab', 'loading']),
         ...mapGetters('articles', ['getAllCategoryArticles']),
         routeName(){
             return this.$route.params.category

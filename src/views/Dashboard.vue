@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="loading">
     <Navigation />
 
     <div class="content-container" v-if="getAllArticles">
@@ -69,7 +69,7 @@ export default {
       }
     },
     computed:{
-      ...mapState('dashboard', ['tab']),
+      ...mapState('dashboard', ['tab', 'loading']),
       ...mapGetters('dashboard', ['getAllArticles'])
     },
     methods:{
