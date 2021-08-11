@@ -33,8 +33,9 @@ const actions = {
     async login({ commit }, form){
         await csrf.getCookie();
         api.post('/login', form)
-        .then(() =>{
+        .then((response) =>{
             localStorage.setItem("auth", "true")
+            localStorage.setItem("id", response.data.id)
             router.push({name: 'Dashboard'})
         })
         .catch((error) => {
