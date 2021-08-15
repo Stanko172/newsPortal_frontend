@@ -4,7 +4,8 @@ import api from '../../api/api'
 //State
 const state = {
     notifications: [],
-    unreadNotificationsNum: 0
+    unreadNotificationsNum: 0,
+    loaded: false
 }
 
 //Getters
@@ -22,6 +23,7 @@ const actions = {
         .then((response) =>{
             commit('SET_NOTIFICATIONS', response.data)
             dispatch('fetchUnreadNotifications')
+            commit('SET_LOADED', true)
         })
     },
     async changeStatus({ dispatch }, payload){
@@ -57,7 +59,8 @@ const actions = {
 //Mutations
 const mutations = {
     SET_NOTIFICATIONS: (state, notifications) => state.notifications = notifications,
-    SET_UNREAD_NUM: (state, unread_num) => state.unreadNotificationsNum = unread_num
+    SET_UNREAD_NUM: (state, unread_num) => state.unreadNotificationsNum = unread_num,
+    SET_LOADED: (state, loaded) => state.loaded = loaded
 }
 
 export default{

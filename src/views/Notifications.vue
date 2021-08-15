@@ -1,5 +1,6 @@
 <template>
 <Navigation />
+<div v-if="loaded">
 <h2>Obavijesti</h2>
     <el-row justify="center">
         <el-col :span="20" >
@@ -49,11 +50,12 @@
             </el-table>
         </el-col>
     </el-row>
+</div>
 </template>
 
 <script>
 import Navigation from '../components/Navigation.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
   export default {
     components:{
         Navigation
@@ -80,7 +82,8 @@ import { mapActions, mapGetters } from 'vuex'
         }
     },
     computed:{
-        ...mapGetters('notifications', ['getNotifications'])
+        ...mapGetters('notifications', ['getNotifications']),
+        ...mapState('notifications', ['loaded'])
     },
     methods: {
         ...mapActions('notifications', ['fetchNotifications', 'changeStatus', 'deleteNotification']),
