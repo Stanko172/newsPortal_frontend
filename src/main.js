@@ -8,6 +8,7 @@ import ability from './services/ability'
 import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
 import 'element-plus/lib/theme-chalk/display.css';
+import VueEasyLightbox from 'vue-easy-lightbox'
 
 import Echo from 'laravel-echo';
 
@@ -28,6 +29,7 @@ const app = createApp(App)
 app.config.globalProperties.eventBus = eventBus
 
 app.use(ElementPlus)
+app.use(VueEasyLightbox)
 app.use(abilitiesPlugin, ability)
 app.use(store)
 app.use(router)

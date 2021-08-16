@@ -44,9 +44,33 @@
 
              <el-row>
                  <el-col :span="24">
-                     <div class="main-text">
-                        {{ getArticle.body }}
+                     <div class="main-text" v-html="getArticle.body">
                      </div>
+                 </el-col>
+             </el-row>
+
+            <!--Lightbox, article images-->
+            <h2>Fotografije</h2>
+            <el-row :gutter="10">
+                <el-col :span="6" v-for="(image, index) in getArticle.image_uploads" :key="index">
+                    <el-image
+                    style="width: 170; height: 170px;cursor: pointer;"
+                    :src="serverURL + image.path"
+                    fit="fit" @click="showMultiple(index)"></el-image>
+                </el-col>
+            </el-row>
+             <el-row>
+                 <el-col :span="24">
+                    <button @click="showSingle">Show single picture.</button>
+                    <button @click="showMultiple">Show a group of pictures.</button>
+                    <vue-easy-lightbox
+                    escDisabled
+                    moveDisabled
+                    :visible="visible"
+                    :imgs="imgs"
+                    :index="index"
+                    @hide="handleHide"
+                    ></vue-easy-lightbox>
                  </el-col>
              </el-row>
 
@@ -73,15 +97,41 @@ export default {
     },
     data(){
         return{
-            serverURL: server
+            serverURL: server,
+            visible: false,
+            index: 0 
         }
     },
     methods:{
-        ...mapActions('article', ['fetchArticle'])
+        ...mapActions('article', ['fetchArticle']),
+        showSingle() {
+        this.imgs = 'http://via.placeholder.com/350x150'
+        // or
+        this.imgs = {
+          title: 'this is a placeholder',
+          src: 'http://via.placeholder.com/350x150'
+        }
+        this.show()
+        },
+        showMultiple(index) {
+            this.index = index// index of imgList
+            this.show()
+        },
+        show() {
+            this.visible = true
+        },
+        handleHide() {
+            this.visible = false
+        }
     },
     computed:{
         ...mapState('article', ['loaded']),
-        ...mapGetters('article', ['getArticle'])
+        ...mapGetters('article', ['getArticle']),
+        imgs(){
+            return this.getArticle.image_uploads.map(function (image){
+                return "http://127.0.0.1:8000" + image.path //HARDKODIRANO -> naknadno promijenti
+            })
+        }
     },
     created(){
         this.fetchArticle(this.$route.params.id)

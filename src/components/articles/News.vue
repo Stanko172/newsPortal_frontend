@@ -50,6 +50,7 @@ export default {
 }
 
 .news-link a{
+    color: #004379;
     text-decoration: none;
 }
 
