@@ -61,8 +61,6 @@
             </el-row>
              <el-row>
                  <el-col :span="24">
-                    <button @click="showSingle">Show single picture.</button>
-                    <button @click="showMultiple">Show a group of pictures.</button>
                     <vue-easy-lightbox
                     escDisabled
                     moveDisabled
@@ -104,15 +102,6 @@ export default {
     },
     methods:{
         ...mapActions('article', ['fetchArticle']),
-        showSingle() {
-        this.imgs = 'http://via.placeholder.com/350x150'
-        // or
-        this.imgs = {
-          title: 'this is a placeholder',
-          src: 'http://via.placeholder.com/350x150'
-        }
-        this.show()
-        },
         showMultiple(index) {
             this.index = index// index of imgList
             this.show()

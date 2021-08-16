@@ -28,9 +28,12 @@
                 type="selection"
                 width="55">
                 </el-table-column>
-                <el-table-column
-                prop="created_at"
-                label="Datum">
+                <el-table-column>
+                    <template #default="scope">
+                        <span>
+                            {{ moment(scope.row.created_at).format("YYYY-MM-DD HH:mm:ss") }}
+                        </span>
+                    </template>
                 </el-table-column>
                 <el-table-column
                 prop="data.message"
@@ -56,6 +59,7 @@
 <script>
 import Navigation from '../components/Navigation.vue'
 import { mapActions, mapGetters, mapState } from 'vuex'
+import moment from 'moment'
   export default {
     components:{
         Navigation
@@ -103,6 +107,7 @@ import { mapActions, mapGetters, mapState } from 'vuex'
     },
     created(){
         this.fetchNotifications('all')
+        this.moment = moment
     }
   }
 </script>

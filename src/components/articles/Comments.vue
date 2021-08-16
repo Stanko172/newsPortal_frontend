@@ -156,6 +156,7 @@ export default {
 }
 
 .comment-section a{
+    color: #004379;
     font-weight: 700;
     text-decoration: none;
 }

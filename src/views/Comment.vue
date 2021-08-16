@@ -10,7 +10,7 @@
                         <div class="comment-first-row">
                             <h4>{{ getComment.author }}</h4>
                             <div>
-                                <span>{{ getComment.created_at }}</span>
+                                <span>{{  moment(getComment.created_at).format("YYYY-MM-DD HH:mm:ss")  }}</span>
                                 <el-button v-if="getComment.can_delete" size="small" icon="el-icon-delete" @click="handleDeleteComment()"></el-button>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                         <div class="comment-first-row">
                             <h4>{{ reply.author }}</h4>
                             <div>
-                                <span>{{ reply.created_at }}</span>
+                                <span>{{ moment(reply.created_at).format("YYYY-MM-DD HH:mm:ss") }}</span>
                                 <el-button v-if="reply.can_delete" size="small" icon="el-icon-delete" @click="deleteReply({reply_id: reply.id, comment_id: getComment.id})"></el-button>
                             </div>
                         </div>
@@ -75,6 +75,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Navigation from '../components/Navigation.vue'
+import moment from 'moment'
 export default {
     components:{
         Navigation
@@ -110,7 +111,7 @@ export default {
         }
     },
     created(){
-
+        this.moment = moment
     },
     mounted(){
         this.fetchReplies(this.$route.params.comment_id)
