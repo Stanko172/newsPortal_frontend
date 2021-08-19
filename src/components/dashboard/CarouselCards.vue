@@ -1,7 +1,7 @@
 <template>
   <div class="carousel-card-container">
     <el-card class="carousel-card" shadow="hover" v-for="article in getAllArticles.slice(4, 7)" :key="article.id">
-        <div class="carousel-card-text">{{ article.title }}</div>
+        <div class="carousel-card-text"><router-link :to="'/vijesti/' + article.category + '/' + article.id">{{ article.title }}</router-link></div>
         <el-row>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="left">{{ article.created_at }}</el-col>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="right"><el-button size="small">Više</el-button></el-col>
@@ -48,6 +48,11 @@ export default {
 .carousel-card-text{
     font-size: 14px;
     margin-bottom: 15px;
+}
+
+.carousel-card-text a{
+    color: white;
+    text-decoration: none;
 }
 
 .el-button{

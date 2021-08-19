@@ -4,7 +4,7 @@
         <div class="news-image-container">
             <el-image :src="item.title_image ? serverURL + item.title_image.path : 'https://cdn.pixabay.com/photo/2015/06/08/15/11/typewriter-801921_960_720.jpg'" fit="fill"></el-image>
             <div class="news-description">
-                <div class="news-link"><router-link to="/">{{ item.title }}</router-link></div>
+                <div class="news-link"><router-link :to="'/vijesti/' + item.category + '/' + item.id">{{ item.title }}</router-link></div>
                 <div class="news-information">
                     <i class="el-icon-share"></i>
                     <div>{{ item.created_at }}</div>

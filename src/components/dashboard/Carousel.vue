@@ -3,7 +3,7 @@
     <el-carousel-item v-for="item in getAllArticles.slice(0, 4)" :key="item">
       
       <figure><img :src="item.title_image ? serverURL + item.title_image.path : 'https://cdn.pixabay.com/photo/2015/06/08/15/11/typewriter-801921_960_720.jpg'"></figure>
-      <div class="carousel-item-content"><h2>{{ item.title }}</h2></div>
+      <div class="carousel-item-content"><router-link :to="'/vijesti/' + item.category + '/' + item.id">{{ item.title }}</router-link></div>
     </el-carousel-item>
   </el-carousel>
 </template>
@@ -71,7 +71,9 @@ img{
     padding: 0.8em;
 }
 
-.carousel-item-content h2{
+.carousel-item-content a{
     color: white;
+    text-decoration: none;
+    font-size: 1.6em;
 }
 </style>

@@ -4,7 +4,7 @@
     <el-card :body-style="{ padding: '0px' }" class="custom-card" v-for="interview in getInterviews" :key="interview.id">
         <img :src="interview.title_image !== null ? serverURL + interview.title_image : 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'" class="image" >
         <div style="padding: 14px;">
-            <span>{{ interview.title }}</span>
+            <router-link class="interview-title" :to="'/vijesti/' + interview.category + '/' + interview.id">{{ interview.title }}</router-link>
             <div class="bottom">
             <time class="time">{{ interview.created_at }}</time>
             <el-button type="text" class="button">Više</el-button>
@@ -72,5 +72,10 @@ export default {
       letter-spacing: 0.2em;
       padding: 0.5em;
       border-bottom: 1px solid rgba(41, 40, 40, 0.589);
+  }
+
+  .interview-title{
+    color: #004379;
+    text-decoration: none;
   }
 </style>
