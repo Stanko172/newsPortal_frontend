@@ -19,7 +19,7 @@ export default {
   watch: {
     $route: {
       handler() {
-        if(localStorage.getItem('auth')){
+        if(localStorage.getItem('auth') != null){
           api.get('/abilities').then(response => {
             this.updateAbility(response.data)
           })
@@ -61,7 +61,6 @@ export default {
       this.showNotification(e.content)
       this.fetchUnreadNotifications()
     })
-    
   }
 }
 </script>

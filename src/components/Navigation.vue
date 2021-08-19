@@ -10,8 +10,8 @@
         <el-menu-item index="1" class="custom-menu-title-class">newsPortal</el-menu-item>
         <el-menu-item v-for="(category, index) in categories" :key="index" :index="(index + 1).toString()" class="custom-menu-item-class"><router-link :to="category === 'naslovnica'? '/' : '/vijesti/' + category">{{ category }}</router-link></el-menu-item>
 
-        <el-menu-item v-if="!isLoggedIn" index="100" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><el-button>Sign up</el-button></el-menu-item>
-        <el-menu-item v-if="!isLoggedIn" index="101" class="custom-menu-item-class hidden-lg-and-down" style="float: right"><a>Login</a></el-menu-item>
+        <el-menu-item v-if="!isLoggedIn" index="100" class="custom-menu-item-class" style="float: right"><router-link to="/register">Sign up</router-link></el-menu-item>
+        <el-menu-item v-if="!isLoggedIn" index="101" class="custom-menu-item-class" style="float: right"><router-link to="/login">Login</router-link></el-menu-item>
 
         <el-submenu v-if="isLoggedIn" index="102" style="float: right;">
             <template #title><i class="el-icon-user"><el-badge is-dot class="top-badge" v-if="getUnreadNotificationsNum > 0"></el-badge></i></template>
@@ -69,7 +69,14 @@ export default {
     },
     computed:{
         ...mapState('navigation', ['categories']),
-        ...mapGetters('notifications', ['getUnreadNotificationsNum'])
+        ...mapGetters('notifications', ['getUnreadNotificationsNum']),
+        isLoggedIn(){
+            if(localStorage.getItem('auth') != null){
+                return true
+            }else{
+                return false
+            }
+        },
     },
     methods:{
         ...mapActions('auth', ['logout',]),
@@ -79,15 +86,14 @@ export default {
         handleClose(done) {
             done();
         },
-        isLoggedIn(){
-            if(localStorage.getItem('auth')) return true
-        },
         handleLogout(){
             this.logout()
         }
     },
     created(){
-        this.fetchUnreadNotifications()
+        if(this.isLoggedIn){
+            this.fetchUnreadNotifications()
+        }
     }
 
 }
